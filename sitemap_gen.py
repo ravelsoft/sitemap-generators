@@ -62,7 +62,7 @@ if sys.hexversion < 0x02020000:
 import fnmatch
 import glob
 import gzip
-import md5
+from hashlib import md5
 import os
 import re
 import stat
@@ -425,7 +425,9 @@ class Output:
     """ Output and count a warning.  Suppress duplicate warnings. """
     if text:
       text = encoder.NarrowText(text, None)
-      hash = md5.new(text).digest()
+      m = md5()
+      m.update(text)
+      hash = m.digest()
       if not self._warns_shown.has_key(hash):
         self._warns_shown[hash] = 1
         print '[WARNING] ' + text
@@ -438,7 +440,9 @@ class Output:
     """ Output and count an error.  Suppress duplicate errors. """
     if text:
       text = encoder.NarrowText(text, None)
-      hash = md5.new(text).digest()
+      m = md5()
+      m.update(text)
+      hash = m.digest()
       if not self._errors_shown.has_key(hash):
         self._errors_shown[hash] = 1
         print '[ERROR] ' + text
@@ -647,9 +651,12 @@ class URL(object):
     """ Provides a uniform way of hashing URLs """
     if not self.loc:
       return None
+    m = md5()
     if self.loc.endswith('/'):
-      return md5.new(self.loc[:-1]).digest()
-    return md5.new(self.loc).digest()
+      m.update(self.loc[:-1])
+      return m.digest()
+    m.update(self.loc)
+    return m.digest()
   #end def MakeHash
 
   def Log(self, prefix='URL', level=3):
@@ -1799,7 +1806,7 @@ class Sitemap(xml.sax.handler.ContentHandler):
     if self._sitemap_type == 'news':
       sitemap_index_header = NEWS_SITEMAP_HEADER
     else:
-      sitemap__index_header = GENERAL_SITEMAP_HEADER
+      sitemap_index_header = GENERAL_SITEMAP_HEADER
  
     # Make a lastmod time
     lastmod = TimestampISO8601(time.time())
