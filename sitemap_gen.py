@@ -1804,9 +1804,9 @@ class Sitemap(xml.sax.handler.ContentHandler):
 
    # Determine what Sitemap index header to use (News or General)
     if self._sitemap_type == 'news':
-      sitemap_index_header = NEWS_SITEMAP_HEADER
+      sitemap_index_header = NEWS_SITEINDEX_HEADER
     else:
-      sitemap_index_header = GENERAL_SITEMAP_HEADER
+      sitemap_index_header = GENERAL_SITEINDEX_HEADER
  
     # Make a lastmod time
     lastmod = TimestampISO8601(time.time())
