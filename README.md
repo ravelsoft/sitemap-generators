@@ -1,3 +1,11 @@
+# sitemap-genators
+
+This project is a fork of :
+
+  http://code.google.com/p/sitemap-generators/
+
+## Original README
+
 sitemap_gen.py
 
 Version 1.5

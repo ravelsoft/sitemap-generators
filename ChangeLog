@@ -83,3 +83,12 @@ Wed Jul 18 01:00:00 2007  Google Inc. <opensource@google.com>
 	  [SMALL]
 	  Added messaging for file permission issues.
 	  
+Wed Feb  08 18:36:19 Félix Delval <felix.delval@ravelsoft.com>
+
+	* sitemap_gen.py: v.1.5.1
+
+	[BIG]
+	Updating the code to work with python 2.5+
+
+	[SMALL]
+	Correcting bug on siteindex
